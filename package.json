@@ -32,7 +32,8 @@
   "dependencies": {
     "split": "^1.0.0",
     "cms-fhir": "git://github.com/amida-tech/cms-fhir.git",
-    "cda-fhir": "git://github.com/amida-tech/cda-fhir.git"
+    "cda-fhir": "git://github.com/amida-tech/cda-fhir.git",
+    "debug": "^2.2.0"
   },
   "devDependencies": {
     "chai": "~2.3.0",
