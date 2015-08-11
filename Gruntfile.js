@@ -5,13 +5,21 @@ var path = require('path');
 module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-istanbul-coverage');
+    grunt.loadNpmTasks('grunt-mocha-istanbul');
     grunt.loadNpmTasks('grunt-mocha-test');
     grunt.loadNpmTasks('grunt-jsbeautifier');
 
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        mocha_istanbul: {
+            coverage: {
+                src: 'test', // a folder works nicely
+                options: {
+                    mask: '*.js'
+                }
+            }
+        },
         jshint: {
             files: ['*.js', './lib/**/*.js', './test/**/*.js'],
             options: {
@@ -62,17 +70,12 @@ module.exports = function (grunt) {
                 },
                 src: ['test/*.js']
             }
-        },
-        shell: {
-            run_istanbul: {
-                command: "istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec --recursive"
-            }
         }
     });
 
     grunt.registerTask('beautify', ['jsbeautifier:beautify']);
     grunt.registerTask('mocha', ['mochaTest']);
-    grunt.registerTask('coverage', ['shell:run_istanbul']);
+    grunt.registerTask('coverage', ['mocha_istanbul:coverage']);
 
     grunt.registerTask('default', ['beautify', 'jshint', 'mocha']);
 
