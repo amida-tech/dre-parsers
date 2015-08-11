@@ -27,9 +27,9 @@ function testCDA(done) {
             console.log('got err!');
             return done(err);
         }
-        /*if(res.body.id !== 'urn:hl7ii:2.16.840.1.113883.19.5.99999.1:TT988') {
-            done('Wrong body id!');
-        }*/
+        if (res.body.id !== 'urn:hl7ii:2.16.840.1.113883.19.5.99999.1:TT988') {
+            return done('Wrong body id!');
+        }
         done();
     });
 }
@@ -42,7 +42,7 @@ function testCMS(done) {
         }
 
         if (res.body.resourceType !== 'Bundle') {
-            done('Wrong body type!');
+            return done('Wrong body type!');
         }
         done();
     });
@@ -50,28 +50,28 @@ function testCMS(done) {
 
 function testMessCDA(done) {
 
-    api.post('/').set('Bearer', 'No Secret!').set('Content-Type', 'text/xml').send(mess).end(function (err, res) {
+    api.post('/').set('Bearer', 'No Secret!').set('Content-Type', 'text/xml').send(mess).expect(400).end(function (err, res) {
         if (err) {
             return done(err);
         }
-        /*if(res.body.id !== 'urn:hl7ii:2.16.840.1.113883.19.5.99999.1:TT988') {
-            done('Wrong body id!');
-        }*/
-        console.log("+++done");
+
+        if (!res.text) {
+            return done('Wrong response');
+        }
         done();
     });
 }
 
 function testMessCMS(done) {
 
-    api.post('/').set('Bearer', 'No Secret!').set('Content-Type', 'text/plain').send(mess).end(function (err, res) {
+    api.post('/').set('Bearer', 'No Secret!').set('Content-Type', 'text/plain').send(mess).expect(400).end(function (err, res) {
         if (err) {
             return done(err);
         }
 
-        /*if(res.body.resourceType !== 'Bundle') {
-            done('Wrong body type!');
-        }*/
+        if (!res.text) {
+            return done('Wrong response');
+        }
         done();
     });
 }
@@ -134,35 +134,34 @@ describe("Test CMS upload", function () {
     });
 });
 
-// TODO Fix error reporting
-/*describe("Test buggy upload", function () {
-     var server;
-    
-    before(function() {
+describe("Test buggy CMS upload", function () {
+    var server;
+
+    before(function () {
         server = require('../lib/parser').createServer().listen(9615);
     });
-    
-   it("feed CMS with data mess", function (done) {
+
+    it("feed with data mess", function (done) {
         testMessCMS(done);
     });
-    
-    after( function() {
+
+    after(function () {
         server.close();
     });
 });
 
-describe("Test buggy upload", function () {
-     var server;
-    
-    before(function() {
+describe("Test buggy CDA upload", function () {
+    var server;
+
+    before(function () {
         server = require('../lib/parser').createServer().listen(9615);
     });
-    
-    it("feed CDA with data mess", function (done) {
+
+    it("feed with data mess", function (done) {
         testMessCDA(done);
     });
-    
-    after( function() {
+
+    after(function () {
         server.close();
     });
-});*/
+});
