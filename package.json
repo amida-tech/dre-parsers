@@ -1,0 +1,59 @@
+{
+  "name": "dre-parsers",
+  "version": "0.9.1",
+  "description": "CMS & CCDA to FHIR parser service",
+  "main": "./index.js",
+  "directories": {
+    "doc": "doc",
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "author": "Dmitry Kachaev <dmitry@amida-tech.com>",
+  "contributors": [
+    {
+      "name": "Matthew McCall",
+      "email": "matt@amida-tech.com"
+    },
+    {
+      "name": "Afsin Ustundag",
+      "email": "afsin.ustundag@us.pwc.com"
+    },
+    {
+      "name": "Matt Martz",
+      "email": "matt.martz@amida-tech.com"
+    }
+  ],
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "dependencies": {
+    "split": "^1.0.0",
+    "cms-fhir": "git://github.com/amida-tech/cms-fhir.git",
+    "cda-fhir": "git://github.com/amida-tech/cda-fhir.git"
+  },
+  "devDependencies": {
+    "chai": "~2.3.0",
+    "grunt": "~0.4.5",
+    "grunt-contrib-jshint": "~0.11.2",
+    "grunt-istanbul-coverage": "~0.1.1",
+    "grunt-jsbeautifier": "~0.2.10",
+    "mocha": "~2.2.4",
+    "supertest": "*",
+    "superagent": "*",
+    "grunt-mocha-test": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amida-tech/dre-parsers.git"
+  },
+  "keywords": [
+    "bluebutton,cms,ccda,cda,parsing"
+  ],
+  "bugs": {
+    "url": "https://github.com/amida-tech/dre-parsers/issues"
+  },
+  "homepage": "https://github.com/amida-tech/dre-parsers"
+}
